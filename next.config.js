@@ -1,25 +1,13 @@
 /** @type {import('next').NextConfig} */
-const repoName = 'todo-frontend'; 
-const isGithubActions = process.env.GITHUB_ACTIONS || false;
-
-let assetPrefix = '/';
-let basePath = '';
-
-if (isGithubActions) {
-  const repo = repoName.startsWith('/') ? repoName.slice(1) : repoName; 
-
-  basePath = `/${repo}`;
-  assetPrefix = `/${repo}/`; 
-}
-
+const repoName = 'todo-frontend'; // <--- เอา // ออก
 const nextConfig = {
-  output: 'export',          // Keep static export enabled
+  output: 'export',
+  basePath: `/${repoName}`,     // <--- เอา // ออก
+  assetPrefix: `/${repoName}/`, // <--- เอา // ออก
   images: {
-    unoptimized: true,       // Required for static export
+    unoptimized: true,
   },
-  trailingSlash: true,       // Optional: Keep if you prefer trailing slashes
-  basePath: basePath,        // Add basePath
-  assetPrefix: assetPrefix,  // Add assetPrefix
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
