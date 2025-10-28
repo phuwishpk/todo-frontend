@@ -11,7 +11,7 @@ export default function AddTodo({ onAdd, loading }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Submit clicked', { title, description }); // ← Debug log
-    
+
     if (!title.trim()) {
       setError('Please enter a title');
       return;
@@ -19,12 +19,12 @@ export default function AddTodo({ onAdd, loading }) {
 
     setSubmitting(true);
     setError(null);
-    
+
     try {
       console.log('Calling onAdd...'); // ← Debug log
-      await onAdd({ 
-        title: title.trim(), 
-        description: description.trim() 
+      await onAdd({
+        title: title.trim(),
+        description: description.trim()
       });
       console.log('onAdd success'); // ← Debug log
       setTitle('');
@@ -38,18 +38,19 @@ export default function AddTodo({ onAdd, loading }) {
   };
 
   return (
+    // คุณอาจจะเปลี่ยนสี border หรือ focus ของ input/textarea ให้เข้ากับธีมใหม่ด้วยก็ได้
     <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border-2 border-purple-100">
       <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
         <span className="text-3xl">➕</span>
         Add New Task
       </h2>
-      
+
       {error && (
         <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
           {error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title Input */}
         <div>
@@ -64,8 +65,8 @@ export default function AddTodo({ onAdd, loading }) {
               setTitle(e.target.value);
             }}
             placeholder="What do you need to do?"
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 
-                     focus:ring-4 focus:ring-purple-100 outline-none transition text-gray-800
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-sky-500 /* แก้ไข */
+                     focus:ring-4 focus:ring-sky-100 /* แก้ไข */ outline-none transition text-gray-800
                      placeholder-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
             disabled={submitting || loading}
             autoFocus
@@ -82,24 +83,26 @@ export default function AddTodo({ onAdd, loading }) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Add more details..."
             rows="3"
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 
-                     focus:ring-4 focus:ring-purple-100 outline-none transition resize-none text-gray-800
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-sky-500 /* แก้ไข */
+                     focus:ring-4 focus:ring-sky-100 /* แก้ไข */ outline-none transition resize-none text-gray-800
                      placeholder-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
             disabled={submitting || loading}
           />
         </div>
 
         {/* Submit Button */}
+        {/* --- 👇 แก้ไขสี Gradient ของปุ่มตรงนี้ 👇 --- */}
         <button
           type="submit"
           disabled={submitting || loading}
           onClick={(e) => console.log('Button clicked', e)} // ← Debug log
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold 
-                   py-4 px-6 rounded-xl hover:from-purple-700 hover:to-pink-700 
+          className="w-full bg-gradient-to-r from-sky-600 to-emerald-600 text-white font-bold
+                   py-4 px-6 rounded-xl hover:from-sky-700 hover:to-emerald-700
                    disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed
                    transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200
                    shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
         >
+        {/* --- 👆 สิ้นสุดการแก้ไข 👆 --- */}
           {submitting ? (
             <>
               <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin" />
@@ -112,7 +115,7 @@ export default function AddTodo({ onAdd, loading }) {
             </>
           )}
         </button>
-        
+
         {/* Debug Info */}
         <div className="text-xs text-gray-400 mt-2">
           Debug: Title length = {title.length}, Submitting = {submitting ? 'true' : 'false'}
