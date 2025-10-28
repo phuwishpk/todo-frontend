@@ -72,21 +72,23 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-teal-50 to-emerald-100 py-8 px-4"> {/* ตัวอย่างแก้สีพื้นหลัง */}
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="text-5xl animate-bounce">✨</div>
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            {/* --- 👇 แก้ไข className ของ h1 ตรงนี้ 👇 --- */}
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-sky-500 to-emerald-500 bg-clip-text text-transparent">
               My Todo List
             </h1>
+            {/* --- 👆 สิ้นสุดการแก้ไข 👆 --- */}
             <div className="text-5xl animate-bounce">📝</div>
           </div>
           <p className="text-gray-600 text-lg mb-4">Organize your tasks beautifully</p>
-          
+
           {/* API Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium 
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
                         shadow-sm bg-white border-2 border-gray-200">
             <div className={`w-3 h-3 rounded-full ${
               apiStatus === 'healthy' ? 'bg-green-500 animate-pulse' :
@@ -108,7 +110,7 @@ export default function Home() {
               <span className="text-2xl">⚠️</span>
               <div>
                 <p className="text-red-800 font-medium">{error}</p>
-                <button 
+                <button
                   onClick={() => { checkHealth(); loadTodos(); }}
                   className="text-red-600 underline text-sm mt-1 hover:text-red-800"
                 >
@@ -119,15 +121,15 @@ export default function Home() {
           </div>
         )}
 
-        {/* Add Todo Form */}
+        {/* Add Todo Form (อย่าลืมแก้สีปุ่มใน AddTodo.jsx ด้วยนะครับ) */}
         <AddTodo onAdd={handleAdd} loading={loading} />
 
         {/* Statistics */}
         <TodoStats todos={todos} />
 
         {/* Todo List */}
-        <TodoList 
-          todos={todos} 
+        <TodoList
+          todos={todos}
           onUpdate={handleUpdate}
           onDelete={handleDelete}
           loading={loading}
